@@ -60,12 +60,12 @@ document.getElementById('numbers').onclick = function () {
 
 
 // Write password to the #password input
-function writePassword() {
-  // I added an if/else to check and make sure at least one of the criteria had been selected. 
-  if (upperCase === true || lowerCase === true || specialCase === true || numbers === true) {
+function generatePassword() {
+  // if/else to check and make sure at least one of the criteria had been selected. 
+  if (upperCase || lowerCase || specialCase || numbers) {
 
     passwordLength = document.getElementById("passwordLength").value;
-    var password = generatePassword();
+    var password = generateRandomPassword();
     var passwordText = document.querySelector("#password");
 
     if (password === undefined) { // give an alert if the password generator fails for some reason. for dev purposes
@@ -75,70 +75,75 @@ function writePassword() {
       passwordText.value = password;
     }
   }
+  // if user did not check at least one box, you will get this else statement
   else {
     alert("You must chose at least one of the password criteria")
   }
 }
 
-// write the function that actually generates a random password.
-function generatePassword() {
-  // set up variables for the random selection of all true character sets
-  let randomSet = [];
-  let ensureSet = [];
-  let passwordString = [];
-  let length = passwordLength;
+// Here is the function that actually generates a random password.
+function generateRandomPassword() {
 
+  let randomSet = []; // Array for a bunch of random, possible characters, that will then go on to be randomly chosen from for the final password
+  let ensureSet = []; // Array for ensuring that at least one of each selected char-set will be included in the final password
+  let passwordString = []; // Array for the final, randomly generated password. 
+
+  // AND the variables for the contents of each possible character set. 
   var upperRange = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   var lowerRange = "abcdefghijklmnopqrstuvwxyz";
   var specialRange = "!@#$%^&*()_+~`-=:;',.<>?/{}[]";
   var numberRange = "1234567890";
 
-  // doing truth checks to print the according char-sets into the respective arrays
-  if (upperCase === true) {
-    randomSelector(upperRange);
-    charsetEnsure(upperRange);
-  };
-  if (lowerCase === true) {
-    randomSelector(lowerRange);
-    charsetEnsure(lowerRange);
-  };
-  if (specialCase === true) {
-    randomSelector(specialRange);
-    charsetEnsure(specialRange);
-  };
-  if (numbers === true) {
-    randomSelector(numberRange);
-    charsetEnsure(numberRange);
-  };
-  // this is the function that provides a bunch of random characters to chose from, and sends them into the randomSet array
-  function randomSelector(arr) {
-    for (let i = 0; i < 75; i++) {
-      arrChar = arr.charAt(Math.floor(Math.random() * arr.length));
-      randomSet.push(arrChar);
+  // doing truth checks to make sure the character sets are only included if the user selected them, then running the functions to include them if they pass.
+  truthCheck(upperCase, upperRange);
+  truthCheck(lowerCase, lowerRange);
+  truthCheck(specialCase, specialRange);
+  truthCheck(numbers, numberRange);
+
+  // Truth-check function for the character selection.
+  function truthCheck(x, y) {
+    if (x) {
+      randomSelector(y); // details below::
+      charsetEnsure(y); // details below::
     };
   };
-  // So this ensures that if a char-set passes its truth check, at least one of that sets characters will show up in the generated password. 
-  function charsetEnsure(arr) {
-    arrChar = arr.charAt(Math.floor(Math.random() * arr.length));
-    ensureSet.push(arrChar);
+
+  // this is the function that provides a bunch of random characters to chose from, and sends them into the randomSet array, to later be chosen from randomly agin.
+  // There are different methods that could be used in place of the for-loop, specifically the middle parameter. 
+  // I chose i < 100 so that it would really fill up the randomSet array with options to choose from, to ensure a thoroughly random password, 
+  // without running too many iterations and causing the function to run really slow. 
+  function randomSelector(x) {
+    for (let i = 0; i < 100; i++) {
+      xChar = x.charAt(Math.floor(Math.random() * x.length));
+      randomSet.push(xChar);
+    };
   };
-  //push the ensured chars to the passwordString, and joining them together so that they don't print with commas later.
+
+  // This function is what ensures that if a char-set passes its truth check, at least one of that sets characters will show up in the generated password. 
+  function charsetEnsure(x) {
+    xChar = x.charAt(Math.floor(Math.random() * x.length));
+    ensureSet.push(xChar);
+  };
+  //then::
+  //push the ensured chars to the passwordString, while joining them together so that they don't print with commas later.
   passwordString.push(ensureSet.join(''));
 
-  // this loop picks random characters form the list complied by the previous loop 
-  // it uses passwordLength to ensure the generated password is the same length as specified by the user
-  for (let i = 0; i < (length - ensureSet.length); i++) {
+  // this loop picks random characters form the randomSet array that was filled earlier by the previous loop (randomSelector())
+  // it uses (passwordLength - ensureSet.length) to ensure the generated password is the same length as specified by the user
+  // (you must subtract ensureSet, because those characters will be added by force, and do not account for what the user specified the length to be)
+  for (let i = 0; i < (passwordLength - ensureSet.length); i++) {
     var charPicked = randomSet[Math.floor(Math.random() * randomSet.length)];
     passwordString.push(charPicked);
   };
+
   // finally, log the result to the console, as well as return the result
   // so that the main function can access the randomly generated password. 
   console.log(passwordString); //console check
   return passwordString.join('').toString();
-}
+};
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+generateBtn.addEventListener("click", generatePassword);
 
 
 
