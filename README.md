@@ -1,5 +1,6 @@
 Password Generator
 =========
+### This project was completed as an assignment for KU's coding program. 
 
 Home work assignment #3 was to set up the logic for a password generator that used the following criteria:
 
