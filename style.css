@@ -9,6 +9,7 @@ body,
 .wrapper {
   height: 100%;
   margin: 0;
+  margin-bottom: 10%;
   padding: 0;
 }
 
