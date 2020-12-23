@@ -9,7 +9,7 @@ body,
 .wrapper {
   height: 100%;
   margin: 0;
-  margin-bottom: 10%;
+  margin-bottom: 10em;
   padding: 0;
 }
 
@@ -99,14 +99,37 @@ header {
   font-size: 22px;
   line-height: 22px;
   margin: 16px 16px 16px 20px;
-  padding: 14px 34px;
+  padding: 8px 20px;
   text-align: center;
   cursor: pointer;
+} .btn:active {
+  background-color: hsl(360, 81%, 56%);
+}
+
+.btn:focus {
+  outline: none;
 }
 
 .btn-warning {
   background-color: hsl(45, 98%, 51%);
   text-align: center;
+} .btn-warning:active {
+  background-color: hsl(45, 98%, 71%);
+}
+
+.btn-save {
+  background-color: #0F9D58;
+} .btn-save:active {
+  background-color: #33ce83;
+}
+
+.btn-small {
+  font-size: 12px;
+  padding: 4px 10px;
+}
+
+.btn-border {
+  border: 3px solid rgba(41, 90, 170, 0.452);
 }
 
 button[disabled] {
@@ -114,8 +137,38 @@ button[disabled] {
   background: #c0c7cf;
 }
 
+#showPassword {
+  margin-left: 10px;
+}
+
+.hide {
+  display: none;
+}
+
 .float-right {
   float: right;
+}
+
+.float-left {
+  float: left;
+}
+
+.clear-fix {
+  content: " ";
+}
+  .clear-fix::after {
+    content: " ";
+    display: block;
+    clear: both;
+  } 
+  .clear-fix::before {
+    content: " ";
+    display: block;
+    clear: both;
+  }
+
+.mb-5 {
+  margin-bottom: 15px;
 }
 
 #password {
@@ -157,6 +210,35 @@ button[disabled] {
   }
 }
 
+.text-input {
+  border: none;
+  background-color: #4286f4a2;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px rgba(0, 0, 0, 0.2) 0px 1px 1px
+    0px;
+  display: inline-block;
+  font-size: 22px;
+  line-height: 22px;
+  margin: 16px 16px 16px 20px;
+  padding: 8px 20px;
+  text-align: center;
+  cursor: pointer;
+} .text-input:focus {
+  outline: none;
+  background-color: #78aaf9a2;
+}
+
+/* list styling */
+.li-none {
+  list-style: none;
+}
+
+.saved-passwords-list {
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 15px;
+  background-color: #4286f4bc;
+}
 
 /* I ADDED A COUPLE CUSTOM STYLES FOR THE STUFF I ADDED.... */
 .mb-3 {

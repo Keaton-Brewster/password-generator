@@ -14,13 +14,15 @@
     <header>
       <h1>Password Generator</h1>
     </header>
-    <div class="card">
+    <div class="card clear-fix">
       <div class="card-header">
         <h2>Generate a Password</h2>
         <h4>Customize your preferences with the criteria below, and then hit the button to get your new password!</h5>
       </div>
-      <div class="card-body">
-        <textarea id="password" placeholder="Your Secure Password" aria-label="Generated Password"></textarea>
+      <div class="card-body clear-fix">
+        <textarea disabled id="password" placeholder="Your Secure Password" aria-label="Generated Password"></textarea>
+        <input type="text" class="text-input" placeholder="username or email">
+        <button class="float-right btn btn-save" id="savePasswordBtn">Save Password</button>
       </div>
       <!-- Here i added a value slider and checkboxes to improve the user experience. 
                 This allows more interactivity with the webpage, versus having to key through
@@ -42,6 +44,10 @@
       <div class="footer-btn">
         <button id="resetBtn" class="btn btn-warning">Reset</button>
       </div>
+    </div>
+    <div class="card clear-fix">
+      <h2>Saved passwords<button id="showPasswordList" class="btn btn-save btn-small">Show</button></h2>
+      <ul id="savedInformation" class="hide"></ul>
     </div>
   </div>
   <script src="script.js"></script>
