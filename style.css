@@ -72,6 +72,21 @@ header {
   display: block;
   clear: both;
 }
+.footer-btn {
+  text-align: center;
+}
+
+.footer-btn::before {
+  content: " ";
+  display: block;
+  width: 100%;
+}
+
+.footer-btn::after {
+  content: " ";
+  display: block;
+  clear: both;
+}
 
 .btn {
   border: none;
@@ -87,6 +102,11 @@ header {
   padding: 14px 34px;
   text-align: center;
   cursor: pointer;
+}
+
+.btn-warning {
+  background-color: hsl(45, 98%, 51%);
+  text-align: center;
 }
 
 button[disabled] {

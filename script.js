@@ -1,5 +1,9 @@
 // Assignment Code
-var generateBtn = document.querySelector("#generate");
+var generateBtn = document.querySelector("#generate"),
+  checkboxes = document.querySelectorAll("input[type=checkbox]"),
+  resetBtn = document.querySelector("#resetBtn"),
+  passwordText = document.querySelector("#password");
+
 
 // made a few global variables, since this is a simple application and it will make a couple things easier. 
 var passwordLength;
@@ -19,7 +23,7 @@ slider.oninput = function () {
 };
 
 // I chose to use checkboxes in the html for selecting password criteria instead of prompts, 
-// Like the slider, I know the assignment called for something else, but i felt that checkboxes were a little more use friendly. 
+// Like the slider, I know the assignment called for something else, but i felt that checkboxes were more use friendly. 
 // This section of the code simply checks the checkboxes and sets a true/false statement depending on their position. 
 document.getElementById('upperCase').onclick = function () {
   if (this.checked) {
@@ -66,8 +70,6 @@ function generatePassword() {
 
     passwordLength = document.getElementById("passwordLength").value;
     var password = generateRandomPassword();
-    var passwordText = document.querySelector("#password");
-
     if (password === undefined) { // give an alert if the password generator fails for some reason. for dev purposes
       alert("error");
     }
@@ -107,7 +109,6 @@ function generateRandomPassword() {
       charsetEnsure(y); // details below::
     };
   };
-
   // this is the function that provides a bunch of random characters to chose from, and sends them into the randomSet array, to later be chosen from randomly agin.
   // There are different methods that could be used in place of the for-loop, specifically the middle parameter. 
   // I chose i < 100 so that it would really fill up the randomSet array with options to choose from, to ensure a thoroughly random password, 
@@ -118,7 +119,6 @@ function generateRandomPassword() {
       randomSet.push(xChar);
     };
   };
-
   // This function is what ensures that if a char-set passes its truth check, at least one of that sets characters will show up in the generated password. 
   function charsetEnsure(x) {
     xChar = x.charAt(Math.floor(Math.random() * x.length));
@@ -142,5 +142,20 @@ function generateRandomPassword() {
   return passwordString.join('').toString();
 };
 
+// Lastly, adding a function to reset the password, along will all criteria, to default state. 
+function resetPassword() {
+  passwordText.value = '';
+  slider.value = 8;
+  output.innerHTML = 8;
+  for (let i = 0; i < checkboxes.length; i++) {
+    checkboxes[i].checked = false;
+  };
+  upperCase = false;
+  lowerCase = false;
+  specialCase = false;
+  numbers = false;
+};
+
 // Add event listener to generate button
 generateBtn.addEventListener("click", generatePassword);
+resetBtn.addEventListener("click", resetPassword);
