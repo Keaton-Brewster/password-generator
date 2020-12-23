@@ -24,6 +24,8 @@ Here is where I note that, while I have satisfied all the criteria, I have not d
 Notable changes that I chose to make include:    
 * Using checkboxes to determine which character-sets would be used in the generation of the password, instead of JS confirms.      
 * Using a range input (slider) to set the desired length of the password, instead of a JS prompt      
+* I added a Reset button that clears all of the inputs and outputs of the password generator, so that you can start from scratch more easily. 
+* I added a "save password" function that takes the password you just generated (if it is still in the field) and saved it along side a username/email to the local storage, and provides a list of all previously saved passwords and such below the generator. 
 
 While these changes do make it such that the criteria given is not met exactly, I took my own liberty to improve over all user-experience by avoiding the use of JS prompts and confirms.
 
