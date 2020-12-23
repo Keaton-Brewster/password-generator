@@ -195,6 +195,8 @@ function savePassword(e) {
         password: passwordToSave.trim()
       };
       savedInformationArr.push(signInANDPassword);
+      usernameORemail.value = ''
+      alert("Success!")
     } else {
       alert("You must enter a valid username or email address");
     };
